@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Fund - Asif Ali</title>
+     <style>
+    .whatsapp-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #25D366;
+        color: white;
+        padding: 12px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 50px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s, background 0.3s;
+    }
+
+    .whatsapp-button:hover {
+        background-color: #1ebe57;
+        transform: scale(1.1);
+    }
+
+    .whatsapp-button img {
+        width: 24px;
+        height: 24px;
+    }
+</style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: linear-gradient(45deg, #ff758c, #ff7eb3, #a1c4fd, #c2e9fb); animation: bgAnimation 10s infinite alternate ease-in-out; }
+        
+        @keyframes bgAnimation { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+
+        h1 { font-size: 36px; font-weight: 700; color: white; text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3); animation: floating 2s ease-in-out infinite; }
+
+        .container { background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 15px; box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2); width: 90%; max-width: 500px; text-align: center; animation: fadeIn 1.2s ease-in-out; }
+
+        .account-info { background: linear-gradient(135deg, #ff758c, #ff7eb3); color: white; padding: 15px; border-radius: 8px; font-size: 18px; font-weight: bold; margin-bottom: 15px; }
+
+        .logos, .qr-codes { display: flex; justify-content: center; gap: 20px; margin: 10px; }
+        .logos img, .qr-codes img { width: 100px; transition: transform 0.3s, filter 0.3s; }
+        .logos img:hover, .qr-codes img:hover { transform: scale(1.1); filter: brightness(1.2); }
+
+        .radio-group { display: flex; justify-content: center; gap: 20px; margin: 10px 0; }
+        .radio-group label { padding: 10px 20px; border-radius: 25px; cursor: pointer; font-size: 16px; font-weight: 600; border: 2px solid transparent; transition: 0.3s; }
+        .radio-group input { display: none; }
+        .radio-group label:hover, .radio-group input:checked + label { border-color: #ff758c; background: rgba(255, 117, 140, 0.1); }
+
+        .input-group { margin: 15px 0; }
+        input { width: 100%; padding: 12px; border: 2px solid #ccc; border-radius: 5px; font-size: 16px; text-align: center; transition: 0.3s; }
+        input:focus { border-color: #ff758c; outline: none; animation: shake 0.3s; }
+
+        .upload-box { background: #f0f0f0; padding: 15px; border-radius: 8px; text-align: center; margin-bottom: 10px; transition: 0.3s; border: 2px dashed #aaa; position: relative; cursor: pointer; }
+        .upload-box:hover { background: #e0e0e0; border-color: #ff758c; }
+        .upload-box input { display: none; }
+        .upload-box label { display: block; font-size: 16px; color: #555; }
+
+        .qr-codes img { display: none; } /* Initially hide QR codes */
+
+        button { width: 100%; padding: 12px; background: linear-gradient(45deg, #ff758c, #ff7eb3); color: white; border: none; border-radius: 25px; font-size: 18px; cursor: pointer; transition: 0.3s; font-weight: bold; animation: glow 1.5s infinite alternate; }
+
+        @keyframes glow { from { box-shadow: 0 0 10px #ff758c; } to { box-shadow: 0 0 20px #ff7eb3; } }
+
+    </style>
+</head>
+<body>
+
+    <h1>✨ Add Fund with Ease! ✨</h1>
+
+    <div class="container">
+        <div class="account-info">
+            <p>Asif Ali</p>
+            <p>JazzCash / EasyPaisa: 03225815922</p>
+            <p>📱 WhatsApp: 03225815922</p>
+        </div>
+
+        <div class="logos">
+            <img src="https://i.postimg.cc/d337RQd4/Jazz-Cash-logo-2025-removebg-preview.png" alt="JazzCash">
+            <img src="https://i.postimg.cc/1tnX47Zj/Easypaisa-logo-removebg-preview.png" alt="EasyPaisa">
+        </div>
+<h2> Select a Payment Method <br> ⏬⬇️👇 </h2>
+        <div class="qr-codes">
+            <img id="jazzcashQR" src="https://i.postimg.cc/gkH6R7fw/Screenshot-20250302-190439.jpg" alt="JazzCash QR">
+            <img id="easypaisaQR" src="https://i.postimg.cc/gkmxYDnG/1740924330625.jpg" alt="EasyPaisa QR">
+        </div>
+
+        <div class="radio-group">
+            <input type="radio" id="jazzcash" name="payment" value="JazzCash" required onchange="showQR()">
+            <label for="jazzcash">JazzCash</label>
+
+            <input type="radio" id="easypaisa" name="payment" value="EasyPaisa" onchange="showQR()">
+            <label for="easypaisa">EasyPaisa</label>
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="username" placeholder="Enter Your Name" required>
+        </div>
+        
+        <div class="input-group">
+            <input type="text" id="paymentnumber" placeholder="Enter Your JazzCash/Easypaisa Number" required>
+        </div>
+
+        <div class="input-group">
+            <input type="number" id="whatsapp" placeholder="Enter Your WhatsApp Number" required>
+        </div>
+
+        <div class="input-group">
+            <input type="number" id="amount" placeholder="Enter Amount" required>
+        </div>
+
+        <div class="upload-box">
+            <input type="file" id="paymentScreenshot" accept="image/*">
+            <label>📸 Upload Payment Screenshot</label>
+        </div>
+
+        <button onclick="sendToTelegram()">💰 Submit</button>
+    </div>
+
+    <script>
+        function showQR() {
+            document.getElementById("jazzcashQR").style.display = document.getElementById("jazzcash").checked ? "block" : "none";
+            document.getElementById("easypaisaQR").style.display = document.getElementById("easypaisa").checked ? "block" : "none";
+        }
+
+        function sendToTelegram() {
+            let botToken = "YOUR_BOT_TOKEN"; 
+            let chatId = "YOUR_CHAT_ID"; 
+            let text = `📌 New Fund Request:\n\n👤 Name: ${document.getElementById("username").value}\n📱 WhatsApp: ${document.getElementById("whatsapp").value}\n 💳 PaymentNumber: ${document.getElementById("paymentnumber").value}\n💰 Amount: ${document.getElementById("amount").value}`;
+            
+            let file = document.getElementById("paymentScreenshot").files[0];
+
+            if (!username || !whatsapp || !amount || !paymentMethod || !file) {
+                alert("⚠️ Please fill all fields and upload a screenshot.");
+                return;
+            }
+
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`);
+            alert("✅ Submitted Successfully!");
+        }
+    </script>
+    
+       <script>
+    function speakUrdu() {
+        let msg = new SpeechSynthesisUtterance();
+        msg.text = "دی گئی ہدایات کے مطابق اپنا فنڈ ایڈ کریں ۔۔۔۔ سکرین شوٹ بھیجیں ۔۔۔۔ اپنا نام لکھیں ۔۔۔۔  اپنا واٹس ایپ نمبر لکھیں ۔۔۔۔۔ جس نمبر سے آپ نے فنڈ ایڈ کی ہے جیز کیش ۔ یا ایزی پیسہ ۔ وہ نمبر لکھیں اور ساتھ سکرین شوٹ لگا دیں پروف کے لیے ۔۔۔ اگر آپ کو سمجھ نہیں ائی تو دیے گئے 0۔3۔2۔2۔5۔8۔1۔5۔9۔2۔2 ۔ نمبر پر کانٹیکٹ کریں ۔۔۔ اور وہاں سے اپنا فنڈ ایڈ کروا لیں ۔۔۔ نیچے کورنر میں دیکھیے ۔ واٹس ایپ بٹن نظر آ رہا ہے ۔ اس پہ کلک کریں اور ایڈمن سے بات کر لیں ۔۔ اگر کوئی مسئلہ ارہا ہے.";
+        msg.lang = "ur-PK"; 
+        msg.volume = 1;
+        msg.rate = 1;
+        msg.pitch = 1;
+
+        speechSynthesis.speak(msg);
+    }
+
+    // Speak automatically when the page loads
+    window.onload = speakUrdu;
+</script>
+
+</body>
+</html>
