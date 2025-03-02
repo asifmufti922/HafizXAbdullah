@@ -133,8 +133,8 @@
         }
 
         function sendToTelegram() {
-            let botToken = "YOUR_BOT_TOKEN"; 
-            let chatId = "YOUR_CHAT_ID"; 
+            let botToken = "7645838184:AAElEjpYFTMLGV6m2SsGQBdkJTKgRTVWw6E"; 
+            let chatId = "7933723681"; 
             let text = `📌 New Fund Request:\n\n👤 Name: ${document.getElementById("username").value}\n📱 WhatsApp: ${document.getElementById("whatsapp").value}\n 💳 PaymentNumber: ${document.getElementById("paymentnumber").value}\n💰 Amount: ${document.getElementById("amount").value}`;
             
             let file = document.getElementById("paymentScreenshot").files[0];
@@ -144,7 +144,7 @@
                 return;
             }
 
-            fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`);
+            fetch(`https://api.telegram.org/bot7645838184:AAElEjpYFTMLGV6m2SsGQBdkJTKgRTVWw6E/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`);
             alert("✅ Submitted Successfully!");
         }
     </script>
