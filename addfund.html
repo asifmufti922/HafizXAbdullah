@@ -42,6 +42,35 @@
 
         @keyframes glow { from { box-shadow: 0 0 10px #ff758c; } to { box-shadow: 0 0 20px #ff7eb3; } }
 
+          /* WhatsApp Button Fix */
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 50px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, background 0.3s;
+            z-index: 1000; /* Ensure it stays on top of other elements */
+        }
+
+        .whatsapp-button:hover {
+            background-color: #1ebe57;
+            transform: scale(1.1);
+        }
+
+        .whatsapp-button img {
+            width: 20px;
+            height: 20px;
+
         /* Confirmation Popup */
         .confirmation-popup {
             position: fixed;
