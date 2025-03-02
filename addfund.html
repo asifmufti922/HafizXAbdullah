@@ -42,33 +42,112 @@
 
         @keyframes glow { from { box-shadow: 0 0 10px #ff758c; } to { box-shadow: 0 0 20px #ff7eb3; } }
 
-        .whatsapp-button {
+        /* Confirmation Popup */
+        .confirmation-popup {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #25D366;
-            color: white;
-            padding: 10px 16px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            z-index: 1000;
+            display: none;
+        }
+
+        .confirmation-popup p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .confirmation-popup button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
             font-size: 14px;
-            font-weight: bold;
-            border-radius: 50px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s, background 0.3s;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+
+        .confirmation-popup button.confirm {
+            background: #25D366;
+            color: white;
+        }
+
+        .confirmation-popup button.cancel {
+            background: #ff758c;
+            color: white;
+        }
+
+        .confirmation-popup button:hover {
+            opacity: 0.9;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: white;
             z-index: 1000;
         }
 
-        .whatsapp-button:hover {
-            background-color: #1ebe57;
-            transform: scale(1.1);
+        .loading::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #fff;
+            border-radius: 50%;
+            border-top-color: #25D366;
+            animation: spin 1s linear infinite;
+            margin: 10px auto;
         }
 
-        .whatsapp-button img {
-            width: 20px;
-            height: 20px;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Success/Cancel Popup */
+        .success-popup, .cancel-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            z-index: 1000;
+            display: none;
+        }
+
+        .success-popup p, .cancel-popup p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .success-popup button, .cancel-popup button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            background: #25D366;
+            color: white;
+            transition: 0.3s;
+        }
+
+        .success-popup button:hover, .cancel-popup button:hover {
+            opacity: 0.9;
         }
     </style>
 </head>
@@ -122,7 +201,29 @@
             <label for="paymentScreenshot">📸 Upload Payment Screenshot</label>
         </div>
 
-        <button onclick="sendToTelegram()">💰 Submit</button>
+        <button onclick="showConfirmation()">💰 Submit</button>
+    </div>
+
+    <!-- Confirmation Popup -->
+    <div class="confirmation-popup">
+        <p>Are you sure you want to submit?</p>
+        <button class="confirm" onclick="confirmSubmission()">Confirm</button>
+        <button class="cancel" onclick="cancelSubmission()">Cancel</button>
+    </div>
+
+    <!-- Loading Animation -->
+    <div class="loading">Processing...</div>
+
+    <!-- Success Popup -->
+    <div class="success-popup">
+        <p>✅ Your order has been submitted successfully!</p>
+        <button onclick="closePopup()">Close</button>
+    </div>
+
+    <!-- Cancel Popup -->
+    <div class="cancel-popup">
+        <p>❌ Submission canceled.</p>
+        <button onclick="closePopup()">Close</button>
     </div>
 
     <!-- WhatsApp Button -->
@@ -137,61 +238,38 @@
             document.getElementById("easypaisaQR").style.display = document.getElementById("easypaisa").checked ? "block" : "none";
         }
 
-        async function sendToTelegram() {
-            let botToken = "7645838184:AAElEjpYFTMLGV6m2SsGQBdkJTKgRTVWw6E"; 
-            let chatId = "7933723681"; 
-            let username = document.getElementById("username").value;
-            let whatsapp = document.getElementById("whatsapp").value;
-            let paymentnumber = document.getElementById("paymentnumber").value;
-            let amount = document.getElementById("amount").value;
-            let paymentMethod = document.querySelector('input[name="payment"]:checked').value;
-            let file = document.getElementById("paymentScreenshot").files[0];
-
-            if (!username || !whatsapp || !amount || !paymentMethod || !file) {
-                alert("⚠️ Please fill all fields and upload a screenshot.");
-                return;
-            }
-
-            let text = `📌 New Fund Request:\n\n👤 Name: ${username}\n📱 WhatsApp: ${whatsapp}\n💳 Payment Number: ${paymentnumber}\n💰 Amount: ${amount}\n💳 Payment Method: ${paymentMethod}`;
-
-            let formData = new FormData();
-            formData.append("chat_id", chatId);
-            formData.append("caption", text);
-            formData.append("photo", file);
-
-            try {
-                let response = await fetch(`https://api.telegram.org/bot7645838184:AAElEjpYFTMLGV6m2SsGQBdkJTKgRTVWw6E/sendPhoto`, {
-                    method: "POST",
-                    body: formData
-                });
-
-                if (response.ok) {
-                    alert("✅ Submitted Successfully!");
-                } else {
-                    alert("❌ Failed to submit. Please try again.");
-                }
-            } catch (error) {
-                console.error("Error:", error);
-                alert("❌ An error occurred. Please try again.");
-            }
-        }
-    </script>
-    
-    <script>
-        function speakUrdu() {
-            let msg = new SpeechSynthesisUtterance();
-            msg.text = "دی گئی ہدایات کے مطابق اپنا فنڈ ایڈ کریں ۔۔۔۔ سکرین شوٹ بھیجیں ۔۔۔۔ اپنا نام لکھیں ۔۔۔۔  اپنا واٹس ایپ نمبر لکھیں ۔۔۔۔۔ جس نمبر سے آپ نے فنڈ ایڈ کی ہے جیز کیش ۔ یا ایزی پیسہ ۔ وہ نمبر لکھیں اور ساتھ سکرین شوٹ لگا دیں پروف کے لیے ۔۔۔ اگر آپ کو سمجھ نہیں ائی تو دیے گئے 0۔3۔2۔2۔5۔8۔1۔5۔9۔2۔2 ۔ نمبر پر کانٹیکٹ کریں ۔۔۔ اور وہاں سے اپنا فنڈ ایڈ کروا لیں ۔۔۔ نیچے کورنر میں دیکھیے ۔ واٹس ایپ بٹن نظر آ رہا ہے ۔ اس پہ کلک کریں اور ایڈمن سے بات کر لیں ۔۔ اگر کوئی مسئلہ ارہا ہے.";
-            msg.lang = "ur-PK"; 
-            msg.volume = 1;
-            msg.rate = 1;
-            msg.pitch = 1;
-
-            speechSynthesis.speak(msg);
+        function showConfirmation() {
+            document.querySelector('.confirmation-popup').style.display = 'block';
         }
 
-        // Speak automatically when the page loads
-        window.onload = speakUrdu;
-    </script>
+        function confirmSubmission() {
+            document.querySelector('.confirmation-popup').style.display = 'none';
+            document.querySelector('.loading').style.display = 'block';
 
+            setTimeout(() => {
+                document.querySelector('.loading').style.display = 'none';
+                document.querySelector('.success-popup').style.display = 'block';
+                clearForm();
+            }, 2000); // Simulate a 2-second delay for processing
+        }
+
+        function cancelSubmission() {
+            document.querySelector('.confirmation-popup').style.display = 'none';
+            document.querySelector('.cancel-popup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.querySelector('.success-popup').style.display = 'none';
+            document.querySelector('.cancel-popup').style.display = 'none';
+        }
+
+        function clearForm() {
+            document.getElementById('username').value = '';
+            document.getElementById('paymentnumber').value = '';
+            document.getElementById('whatsapp').value = '';
+            document.getElementById('amount').value = '';
+            document.getElementById('paymentScreenshot').value = '';
+        }
+    </script>
 </body>
 </html>
