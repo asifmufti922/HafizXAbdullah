@@ -751,6 +751,39 @@
                 hideError("whatsapp-number-error");
             }
         }
+
+function resetForm() {
+    // Reset category dropdown
+    document.getElementById("selected-category").innerText = "Select Category";
+    document.getElementById("category").value = ""; // Clear hidden input value
+
+    // Reset service dropdown
+    document.getElementById("selected-service").innerText = "Select Service";
+    document.getElementById("service").value = ""; // Clear hidden input value
+    document.getElementById("service-dropdown").style.display = "none";
+
+    // Hide inputs section
+    document.getElementById("inputs-section").style.display = "none";
+
+    // Clear form fields
+    document.getElementById("video-link").value = "";
+    document.getElementById("quantity").value = 1000;
+    document.getElementById("whatsapp-number").value = "";
+    document.getElementById("price").innerText = "Rs 0";
+    document.getElementById("price-value").value = ""; // Clear hidden input value
+
+    // Reset password section for Hussain category
+    if (selectedCategory === "Hussain") {
+        document.getElementById("boss-password").value = ""; // Clear password input
+        document.getElementById("password-section").style.display = "block";
+    }
+
+    // Hide any error messages
+    hideError("video-link-error");
+    hideError("quantity-error");
+    hideError("whatsapp-number-error");
+}
+        
     </script>
 </body>
 </html>
