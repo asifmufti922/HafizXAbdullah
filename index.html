@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abdullah ❤️ Muhammad</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Updated Search Bar Styles */
+    .search-bar {
+      margin-bottom: 20px;
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin: 20px auto;
+    }
+    .search-bar input {
+      width: 100%;
+      padding: 15px 50px 15px 20px;
+      border: 2px solid transparent;
+      border-radius: 30px;
+      font-size: 16px;
+      outline: none;
+      transition: all 0.4s ease;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      color: var(--primary-color);
+    }
+    .search-bar input:focus {
+      border-color: var(--secondary-color);
+      transform: scale(1.02);
+    }
+    .search-bar input::placeholder {
+      color: #888;
+      font-weight: 400;
+    }
+    .search-bar i {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--secondary-color);
+      font-size: 20px;
+      transition: all 0.3s ease;
+    }
+    .search-bar input:focus + i {
+      color: var(--hover-color);
+      transform: translateY(-50%) scale(1.1);
+    }
+    @keyframes searchGlow {
+      0% { box-shadow: 0 0 10px rgba(52,152,219,0.3); }
+      50% { box-shadow: 0 0 20px rgba(52,152,219,0.6); }
+      100% { box-shadow: 0 0 10px rgba(52,152,219,0.3); }
+    }
+    .search-bar input:focus {
+      animation: searchGlow 2s infinite;
+    }
+    .highlight {
+      background-color: #ffeb3b;
+      font-weight: bold;
+      color: #2c3e50;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+    @media (max-width: 600px) {
+      .search-bar input {
+        padding: 12px 40px 12px 15px;
+        font-size: 14px;
+      }
+      .search-bar i {
+        right: 15px;
+        font-size: 18px;
+      }
+    }
+  </style>
+  
+  <style>
+    /* Global Styles */
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #3498db;
+      --hover-color: #2980b9;
+      --animation-speed: 0.5s;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: linear-gradient(45deg, #ff758c, #ff7eb3, #87c1db, #c2e9fb);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: var(--primary-color);
+      padding: 10px;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: rgba(255,255,255,0.9);
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    /* Top Buttons */
+    .top-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+    .btn-refill, .btn-add-fund {
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: bold;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      flex: 1 1 45%;
+    }
+    .btn-refill {
+      background: linear-gradient(45deg, #6a11cb, #2575fc);
+    }
+    .btn-add-fund {
+      background: linear-gradient(45deg, #00b09b, #96c93d);
+    }
+    .btn-refill:hover, .btn-add-fund:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+    .btn-refill:active, .btn-add-fund:active {
+      transform: scale(0.95);
+    }
+    .header {
+      text-align: center;
+      padding-bottom: 15px;
+    }
+    .header img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+    .dropdown button {
+      width: 100%;
+      padding: 10px;
+      background: linear-gradient(45deg, #6a11cb, #2575fc);
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      animation: buttonGlow 2s infinite;
+    }
+    .dropdown button:hover {
+      transform: scale(1.05);
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      width: 100%;
+      background: white;
+      border: 1px solid #ddd;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      border-radius: 5px;
+      animation: fadeIn var(--animation-speed) ease;
+      z-index: 3;
+    }
+    .dropdown-content div {
+      padding: 10px;
+      cursor: pointer;
+      transition: all 0.5s ease;
+      display: flex;
+      align-items: center;
+    }
+    .dropdown-content div:hover {
+      background: var(--hover-color);
+      color: white;
+    }
+    .dropdown-content img {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+    }
+    .input-group {
+      margin-top: 10px;
+    }
+    .input-group input, .input-group textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    .input-group textarea {
+      height: 80px;
+      resize: vertical;
+    }
+    .btn-submit, .btn-reset, .btn-pkr-to-usd, .btn-cancel {
+      width: 100%;
+      padding: 10px;
+      background: linear-gradient(45deg, #6a11cb, #2575fc);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      border-radius: 5px;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+      animation: buttonGlow 2s infinite;
+    }
+    .btn-submit:hover, .btn-reset:hover, .btn-pkr-to-usd:hover, .btn-cancel:hover {
+      transform: scale(1.05);
+    }
+    #price {
+      font-weight: bold;
+      text-align: center;
+      font-size: 18px;
+      padding: 10px;
+      background: #222;
+      color: white;
+      border-radius: 5px;
+      margin-top: 10px;
+      text-shadow: 0 0 5px #fff, 0 0 10px #0ff, 0 0 15px #0ff;
+      animation: glow 1.5s infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #fff, 0 0 10px #0ff, 0 0 15px #0ff; }
+      to { text-shadow: 0 0 10px #fff, 0 0 20px #0ff, 0 0 30px #0ff; }
+    }
+    @keyframes buttonGlow {
+      0% { box-shadow: 0 0 10px rgba(106,17,203,0.5); }
+      50% { box-shadow: 0 0 20px rgba(106,17,203,0.8); }
+      100% { box-shadow: 0 0 10px rgba(106,17,203,0.5); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #loading-spinner {
+      display: none;
+      text-align: center;
+      margin-top: 15px;
+    }
+    #confirmation-modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(45deg, #6a11cb, #2575fc);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      text-align: center;
+      z-index: 1000;
+      max-width: 90%;
+    }
+    #confirmation-modal p {
+      margin-bottom: 15px;
+    }
+    #confirm-yes, #confirm-no {
+      padding: 8px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: buttonGlow 2s infinite;
+    }
+    #confirm-yes {
+      background: linear-gradient(45deg, #00b09b, #96c93d);
+    }
+    #confirm-no {
+      background: linear-gradient(45deg, #ff416c, #d45d0e);
+    }
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+    }
+    #password-section {
+      display: none;
+      margin-top: 10px;
+      transition: all var(--animation-speed) ease;
+    }
+    #password-section input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+    .welcome-message {
+      animation: textGlow 1.5s infinite;
+      font-size: 18px;
+      color: #ffd700;
+      text-align: center;
+      margin-top: 15px;
+    }
+    @keyframes textGlow {
+      0% { text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+      50% { text-shadow: 0 0 20px rgba(255,255,255,0.8); }
+      100% { text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+    }
+    
+    /* Original Fixed Hafiz Data & WhatsApp Buttons */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 10px;
+      padding: 10px 15px;
+      font-size: 15px;
+      color: #fff;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(18,140,126,0.4);
+      animation: pulse 2s infinite, glow 1.5s infinite alternate;
+      transition: all 0.3s ease;
+      z-index: 9999;
+    }
+    .whatsapp-btn i {
+      font-size: 18px;
+      margin-right: 12px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+      transition: transform 0.3s ease;
+    }
+    .whatsapp-btn span {
+      font-family: 'Arial', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
+    .whatsapp-btn:hover {
+      transform: scale(1.08) translateY(-5px);
+      box-shadow: 0 15px 40px rgba(18,140,126,0.6);
+    }
+    .whatsapp-btn:hover i {
+      transform: rotate(15deg) scale(1.1);
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    @keyframes glow {
+      0% { box-shadow: 0 0 25px rgba(37,211,102,0.4); }
+      100% { box-shadow: 0 0 45px rgba(37,211,102,0.7); }
+    }
+    .hafiz-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 10px;
+      padding: 10px 15px;
+      font-size: 15px;
+      color: #fff;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(18,140,126,0.4);
+      animation: pulse 2s infinite, glow 1.5s infinite alternate;
+      transition: all 0.3s ease;
+      z-index: 9999;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .hafiz-btn img {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    .hafiz-btn span {
+      font-family: 'Arial', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
+    
+    /* Error message adjustments */
+    .error-message {
+      color: red;
+      font-size: 10px;  /* Reduced font-size */
+      margin-top: 5px;
+      display: none;
+    }
+    .input-group.invalid input {
+      border-color: red;
+    }
+    
+    /* Success/Fail Popup Styles */
+    #success-popup, #fail-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(45deg, #6a11cb, #2575fc);
+      color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      text-align: center;
+      z-index: 1000;
+      animation: popupFadeIn 0.5s ease;
+      max-width: 90%;
+    }
+    @keyframes popupFadeIn {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+    #success-popup i, #fail-popup i {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+    #success-popup p, #fail-popup p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    #success-popup button, #fail-popup button {
+      padding: 8px 20px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: buttonGlow 2s infinite;
+    }
+    #success-popup button {
+      background: linear-gradient(45deg, #00b09b, #96c93d);
+    }
+    #fail-popup button {
+      background: linear-gradient(45deg, #ff416c, #d45d0e);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .container {
+        padding: 10px;
+      }
+      .btn-refill, .btn-add-fund {
+        font-size: 12px;
+        padding: 8px 15px;
+      }
+      .dropdown button {
+        font-size: 12px;
+      }
+      .input-group input, .input-group textarea {
+        font-size: 12px;
+      }
+      .btn-submit, .btn-reset, .btn-pkr-to-usd, .btn-cancel {
+        font-size: 12px;
+      }
+      #price {
+        font-size: 16px;
+      }
+      .welcome-message {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Search services (e.g., TikTok Likes)" oninput="searchServices()">
+      <i class="fas fa-search"></i>
+    </div>
+
+    <!-- Top Buttons -->
+    <div class="top-buttons">
+      <a href="./refill.html" class="btn-refill">Refill Order</a>
+      <a href="./fund.html" class="btn-add-fund">Add Fund</a>
+
+    </div>
+
+    <div class="header">
+      <img src="https://i.postimg.cc/P50MnT8b/IMG-20250301-WA0011.jpg" alt="Logo">
+      <h1>Abdullah ❤️‍🔥 Muhammad</h1>
+    </div>
+
+    <!-- Category Dropdown -->
+    <div class="dropdown">
+      <button id="selected-category" onclick="toggleCategory()">Select Category</button>
+      <div id="category-list" class="dropdown-content">
+        <div onclick="selectCategory('TikTok')"><img src="https://www.freepnglogos.com/uploads/tik-tok-logo-png/tik-tok-logo-vectors-9.png" alt="TikTok"> TikTok</div>
+        <div onclick="selectCategory('YouTube')"><img src="https://upload.wikimedia.org/wikipedia/commons/7/72/YouTube_social_white_square_%282017%29.svg" alt="YouTube"> YouTube</div>
+        <div onclick="selectCategory('Facebook')"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Facebook</div>
+        <div onclick="selectCategory('Instagram')"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram"> Instagram</div>
+        <div onclick="selectCategory('Hussain')"><img src="https://i.postimg.cc/tg0YNFkh/IMG-20250301-WA0027.jpg" alt="Hussain"> Hussain</div>
+      </div>
+    </div>
+
+    <!-- Password Section for Hussain Category -->
+    <div id="password-section">
+      <input type="password" id="boss-password" placeholder="Enter Secret Password">
+      <button onclick="checkPassword()" class="btn-submit">Verify</button>
+      <div id="welcome-message" class="welcome-message" style="display: none;"></div>
+    </div>
+
+    <!-- Service Dropdown -->
+    <div class="dropdown" id="service-dropdown" style="display: none;">
+      <button id="selected-service" onclick="toggleService()">Select Service</button>
+      <div id="service-list" class="dropdown-content"></div>
+    </div>
+
+    <!-- Inputs Section -->
+    <div id="inputs-section" style="display: none;">
+      <div class="input-group">
+        <label>Video/Post Link:</label>
+        <input type="text" id="video-link" name="video-link" placeholder="Paste your link here" oninput="validateVideoLink()">
+        <div class="error-message" id="video-link-error">Please enter a valid URL (e.g., https://example.com).</div>
+      </div>
+      <div class="input-group">
+        <label>Quantity (100 - 10,000):</label>
+        <input type="number" id="quantity" name="quantity" min="100" max="10000" value="1000" oninput="calculatePrice()">
+        <div class="error-message" id="quantity-error">Quantity must be between 100 and 10,000.</div>
+      </div>
+      <div class="input-group">
+        <label>WhatsApp Number:</label>
+        <input type="text" id="whatsapp-number" name="whatsapp-number" placeholder="Enter your WhatsApp number" oninput="validateWhatsAppNumber()">
+        <div class="error-message" id="whatsapp-number-error">Please enter a valid Pakistani WhatsApp number (e.g., 03123456789).</div>
+      </div>
+      <div id="price">Rs 0</div>
+      <input type="hidden" id="category" name="category">
+      <input type="hidden" id="service" name="service">
+      <input type="hidden" id="price-value" name="price">
+      <button type="submit" class="btn-submit" onclick="submitOrder()">Submit Order</button>
+      <button type="reset" class="btn-reset" onclick="resetForm()">Reset Form</button>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loading-spinner">
+      <i class="fas fa-spinner fa-spin fa-3x"></i>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div id="confirmation-modal">
+    <p>Are you sure you want to submit this order?</p>
+    <button id="confirm-yes" onclick="confirmOrder()">Confirm</button>
+    <button id="confirm-no" onclick="closeModal()">Cancel</button>
+  </div>
+  <div id="overlay"></div>
+
+  <!-- Success Popup -->
+  <div id="success-popup">
+    <i class="fas fa-check-circle"></i>
+    <p>Order submitted successfully! Thank you.</p>
+    <button onclick="closeSuccessPopup()">Close</button>
+  </div>
+
+  <!-- Fail Popup -->
+  <div id="fail-popup">
+    <i class="fas fa-times-circle"></i>
+    <p>Failed to submit order. Please try again.</p>
+    <button onclick="closeFailPopup()">Close</button>
+  </div>
+
+  <!-- Fixed WhatsApp Button (Bottom Right) -->
+  <button class="whatsapp-btn" onclick="window.open('https://wa.me/923225815922?text=Assalamualaikum%20Hafiz%20Muhammad%20Ali%20Saab%20💝','_blank')">
+    <i class="fab fa-whatsapp"></i>
+    <span>Chat Now</span>
+  </button>
+
+  <!-- Fixed Hafiz Data Button (Bottom Left) -->
+  <a href="#" class="hafiz-btn">
+   
+    <span>Hafiz DATA</span>
+  </a>
+
+  <script>
+    // Replace with your Telegram Bot token and Chat ID
+    // Updated Telegram Bot configuration
+    const telegramBotToken = '7251452177:AAEMKs8bl3IhtdNM5_GWRS-0mu-reWYaxXI';
+    const chatId = '7933723681';
+
+    const services = {
+      TikTok: {
+        "TIKTOK Views Refill Lifetime Non Drop": { price: 2, logo: "https://www.freepnglogos.com/uploads/tik-tok-logo-png/tik-tok-logo-vectors-9.png" },
+        "TikTok Likes Refill Lifetime Non Drop": { price: 60, logo: "https://www.freepnglogos.com/uploads/tik-tok-logo-png/tik-tok-logo-vectors-9.png" },
+        "TikTok Followers Pakistani🇵🇰 Lifetime Non Drop": { price: 500, logo: "https://www.freepnglogos.com/uploads/tik-tok-logo-png/tik-tok-logo-vectors-9.png" },
+        "TikTok Followers Refill Lifetime Non Drop": { price: 370, logo: "https://www.freepnglogos.com/uploads/tik-tok-logo-png/tik-tok-logo-vectors-9.png" },
+        "TikTok Shares": { price: 50, logo: "https://www.freepnglogos.com/uploads/tik-tok-logo-png/tik-tok-logo-vectors-9.png" },
+        "TikTok Saves": { price: 50, logo: "https://www.freepnglogos.com/uploads/tik-tok-logo-png/tik-tok-logo-vectors-9.png" },
+        "TikTok Favorites": { price: 50, logo: "https://www.freepnglogos.com/uploads/tik-tok-logo-png/tik-tok-logo-vectors-9.png" }
+      },
+      YouTube: {
+        "YouTube Subscribers Cheap Lifetime Refill Non Drop": { price: 700, logo: "https://upload.wikimedia.org/wikipedia/commons/7/72/YouTube_social_white_square_%282017%29.svg" },
+        "YouTube Subscribers Fast Lifetime Refill Non Drop": { price: 1000, logo: "https://upload.wikimedia.org/wikipedia/commons/7/72/YouTube_social_white_square_%282017%29.svg" },
+        "YouTube Likes No Refill": { price: 100, logo: "https://upload.wikimedia.org/wikipedia/commons/7/72/YouTube_social_white_square_%282017%29.svg" },
+        "YouTube Likes Lifetime Refill Non Drop": { price: 150, logo: "https://upload.wikimedia.org/wikipedia/commons/7/72/YouTube_social_white_square_%282017%29.svg" }
+      },
+      Facebook: {
+        "Facebook Followers Page/Profile Lifetime Refill Non Drop": { price: 500, logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" },
+        "Facebook Followers Page/Profile 30 Days Refill": { price: 350, logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" },
+        "Facebook Post Reactions No Refill": { price: 350, logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" },
+        "Facebook Post Reactions Lifetime Refill Non Drop": { price: 800, logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" }
+      },
+      Instagram: {
+        "Instagram Followers No Refill": { price: 400, logo: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" },
+        "Instagram Followers Refill Lifetime Non-Drop": { price: 600, logo: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" },
+        "Instagram Likes No Refill": { price: 40, logo: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" },
+        "Instagram Likes Refill Lifetime Non-Drop": { price: 60, logo: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" }
+      },
+      Hussain: {
+        "Boss Aapke liye TikTok Likes Refill Lifetime": { price: 40, logo: "https://i.postimg.cc/tg0YNFkh/IMG-20250301-WA0027.jpg" },
+        "Boss Aapke liye TikTok Followers Refill Lifetime Non-Drop": { price: 200, logo: "https://i.postimg.cc/tg0YNFkh/IMG-20250301-WA0027.jpg" },
+        "Boss Views Aapke liye TikTok Views": { price: 1, logo: "https://i.postimg.cc/tg0YNFkh/IMG-20250301-WA0027.jpg" }
+      }
+    };
+
+    let selectedCategory = "";
+    let selectedService = "";
+    let selectedPrice = 0;
+
+    function toggleCategory() {
+      const categoryList = document.getElementById("category-list");
+      categoryList.style.display = categoryList.style.display === "block" ? "none" : "block";
+      document.getElementById("service-dropdown").style.display = "none";
+    }
+
+    function toggleService() {
+      const serviceList = document.getElementById("service-list");
+      serviceList.style.display = serviceList.style.display === "block" ? "none" : "block";
+      document.getElementById("category-list").style.display = "none";
+    }
+
+    function selectCategory(category) {
+      selectedCategory = category;
+      document.getElementById("selected-category").innerText = category;
+      document.getElementById("category").value = category;
+      document.getElementById("category-list").style.display = "none";
+      if (category === "Hussain") {
+        document.getElementById("boss-password").value = "";
+        document.getElementById("password-section").style.display = "block";
+        document.getElementById("service-dropdown").style.display = "none";
+        document.getElementById("inputs-section").style.display = "none";
+      } else {
+        document.getElementById("password-section").style.display = "none";
+        document.getElementById("service-dropdown").style.display = "block";
+        document.getElementById("inputs-section").style.display = "none";
+        let serviceList = document.getElementById("service-list");
+        serviceList.innerHTML = "";
+        for (let service in services[category]) {
+          serviceList.innerHTML += `<div onclick="selectService('${service}', ${services[category][service].price})"><img src="${services[category][service].logo}" alt="${service}"> ${service}</div>`;
+        }
+      }
+    }
+
+    function checkPassword() {
+      const password = document.getElementById("boss-password").value;
+      const welcomeMessage = document.getElementById("welcome-message");
+      if (password === "abdullahXhafiz") {
+        welcomeMessage.style.display = "block";
+        welcomeMessage.textContent = "Welcome My Boss Mr Hussain";
+        const speech = new SpeechSynthesisUtterance();
+        speech.text = "Welcome My Boss Mr Hussain";
+        window.speechSynthesis.speak(speech);
+        document.getElementById("password-section").style.display = "none";
+        document.getElementById("service-dropdown").style.display = "block";
+        let serviceList = document.getElementById("service-list");
+        serviceList.innerHTML = "";
+        for (let service in services["Hussain"]) {
+          serviceList.innerHTML += `<div onclick="selectService('${service}', ${services["Hussain"][service].price})"><img src="${services["Hussain"][service].logo}" alt="${service}"> ${service}</div>`;
+        }
+      } else {
+        const speech = new SpeechSynthesisUtterance();
+        speech.text = "Hey, go! This service is not for you. This service is only for my boss Mr Hussain.";
+        window.speechSynthesis.speak(speech);
+        alert("Wrong password! Try again.");
+      }
+    }
+
+    function selectService(service, pricePer1000) {
+      selectedService = service;
+      selectedPrice = pricePer1000;
+      document.getElementById("selected-service").innerText = service;
+      document.getElementById("service").value = service;
+      document.getElementById("service-list").style.display = "none";
+      document.getElementById("inputs-section").style.display = "block";
+      document.getElementById("quantity").dataset.price = pricePer1000;
+      calculatePrice();
+    }
+
+    function calculatePrice() {
+      let quantity = document.getElementById("quantity").value;
+      let pricePer1000 = document.getElementById("quantity").dataset.price || 0;
+      let totalPrice = ((quantity / 1000) * pricePer1000).toFixed(2);
+      document.getElementById("price").innerText = "Rs " + totalPrice;
+      document.getElementById("price-value").value = totalPrice;
+    }
+
+    function submitOrder() {
+      const videoLink = document.getElementById("video-link").value;
+      const quantity = document.getElementById("quantity").value;
+      const whatsappNumber = document.getElementById("whatsapp-number").value;
+      if (!isValidUrl(videoLink)) {
+        showError("video-link-error", "Please enter a valid URL (e.g., https://example.com).");
+        return;
+      } else {
+        hideError("video-link-error");
+      }
+      if (!isValidWhatsAppNumber(whatsappNumber)) {
+        showError("whatsapp-number-error", "Please enter a valid Pakistani WhatsApp number (e.g., 03123456789).");
+        return;
+      } else {
+        hideError("whatsapp-number-error");
+      }
+      if (quantity < 100 || quantity > 10000) {
+        showError("quantity-error", "Quantity must be between 100 and 10,000.");
+        return;
+      } else {
+        hideError("quantity-error");
+      }
+      document.getElementById("confirmation-modal").style.display = "block";
+      document.getElementById("overlay").style.display = "block";
+      if (selectedCategory === "Hussain") {
+        const speech = new SpeechSynthesisUtterance();
+        speech.text = "Boss, are you sure you want to confirm this order?";
+        window.speechSynthesis.speak(speech);
+      }
+    }
+function confirmOrder() {
+      closeModal();
+      const spinner = document.getElementById("loading-spinner");
+      spinner.style.display = "block";
+      
+      const orderDetails = {
+        category: selectedCategory,
+        service: selectedService,
+        quantity: document.getElementById("quantity").value,
+        price: document.getElementById("price-value").value,
+        videoLink: document.getElementById("video-link").value,
+        whatsappNumber: document.getElementById("whatsapp-number").value
+      };
+
+      const message = `📦 New Order!\n\n▫️ Category: ${orderDetails.category}\n▫️ Service: ${orderDetails.service}\n▫️ Quantity: ${orderDetails.quantity}\n▫️ Price: Rs ${orderDetails.price}\n▫️ Link: ${orderDetails.videoLink}\n▫️ WhatsApp: ${orderDetails.whatsappNumber}`;
+
+      // Fixed Telegram API URL with GET request
+      const telegramAPI = `https://api.telegram.org/bot7251452177:AAEMKs8bl3IhtdNM5_GWRS-0mu-reWYaxXI/sendMessage`;
+      const params = new URLSearchParams({
+        chat_id: chatId,
+        text: message,
+        parse_mode: 'HTML'
+      });
+
+      fetch(`${telegramAPI}?${params}`)
+      .then(response => {
+        spinner.style.display = "none";
+        if (response.ok) {
+          showSuccessPopup();
+          resetForm();
+          if (selectedCategory === "Hussain") {
+            const speech = new SpeechSynthesisUtterance();
+            speech.text = "Boss, your order is submitted.";
+            window.speechSynthesis.speak(speech);
+          }
+        } else {
+          throw new Error('Telegram API error');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        spinner.style.display = "none";
+        showFailPopup();
+      });
+    }
+
+    function closeModal() {
+      document.getElementById("confirmation-modal").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+      if (selectedCategory === "Hussain") {
+        const speech = new SpeechSynthesisUtterance();
+        speech.text = "Okay, boss, your order is canceled.";
+        window.speechSynthesis.speak(speech);
+      }
+      if (selectedCategory === "Hussain") {
+        document.getElementById("boss-password").value = "";
+        document.getElementById("password-section").style.display = "block";
+        document.getElementById("service-dropdown").style.display = "none";
+        document.getElementById("inputs-section").style.display = "none";
+      }
+    }
+
+    function resetForm() {
+      document.getElementById("selected-category").innerText = "Select Category";
+      document.getElementById("selected-service").innerText = "Select Service";
+      document.getElementById("service-dropdown").style.display = "none";
+      document.getElementById("inputs-section").style.display = "none";
+      document.getElementById("video-link").value = "";
+      document.getElementById("quantity").value = 1000;
+      document.getElementById("whatsapp-number").value = "";
+      document.getElementById("price").innerText = "Rs 0";
+      if (selectedCategory === "Hussain") {
+        document.getElementById("boss-password").value = "";
+        document.getElementById("password-section").style.display = "block";
+      }
+    }
+
+    function isValidUrl(url) {
+      try {
+        new URL(url);
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function isValidWhatsAppNumber(number) {
+      const regex = /^03\d{9}$/;
+      return regex.test(number);
+    }
+
+    function showError(id, message) {
+      const errorElement = document.getElementById(id);
+      errorElement.textContent = message;
+      errorElement.style.display = "block";
+      document.querySelector(`#${id.replace("-error", "")}`).classList.add("invalid");
+    }
+
+    function hideError(id) {
+      const errorElement = document.getElementById(id);
+      errorElement.style.display = "none";
+      document.querySelector(`#${id.replace("-error", "")}`).classList.remove("invalid");
+    }
+
+    function validateVideoLink() {
+      const videoLink = document.getElementById("video-link").value;
+      if (!isValidUrl(videoLink)) {
+        showError("video-link-error", "Please enter a valid URL (e.g., https://example.com).");
+      } else {
+        hideError("video-link-error");
+      }
+    }
+
+    function validateQuantity() {
+      const quantity = document.getElementById("quantity").value;
+      if (quantity < 100 || quantity > 10000) {
+        showError("quantity-error", "Quantity must be between 100 and 10,000.");
+      } else {
+        hideError("quantity-error");
+      }
+    }
+
+    function validateWhatsAppNumber() {
+      const whatsappNumber = document.getElementById("whatsapp-number").value;
+      if (!isValidWhatsAppNumber(whatsappNumber)) {
+        showError("whatsapp-number-error", "Please enter a valid Pakistani WhatsApp number (e.g., 03123456789).");
+      } else {
+        hideError("whatsapp-number-error");
+      }
+    }
+
+    function showSuccessPopup() {
+      document.getElementById("success-popup").style.display = "block";
+      document.getElementById("overlay").style.display = "block";
+    }
+
+    function closeSuccessPopup() {
+      document.getElementById("success-popup").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }
+
+    function showFailPopup() {
+      document.getElementById("fail-popup").style.display = "block";
+      document.getElementById("overlay").style.display = "block";
+    }
+
+    function closeFailPopup() {
+      document.getElementById("fail-popup").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }
+
+    function searchServices() {
+      const searchTerm = document.getElementById("search-input").value.toLowerCase();
+      const serviceList = document.getElementById("service-list");
+      serviceList.innerHTML = "";
+      if (searchTerm) {
+        for (let category in services) {
+          if (category !== "Hussain") {
+            for (let service in services[category]) {
+              if (service.toLowerCase().includes(searchTerm)) {
+                const highlighted = service.replace(
+                  new RegExp(searchTerm, 'gi'), 
+                  match => `<span class="highlight">${match}</span>`
+                );
+                serviceList.innerHTML += `
+                  <div onclick="selectService('${service}', ${services[category][service].price})">
+                    <img src="${services[category][service].logo}" alt="${service}">
+                    ${highlighted}
+                  </div>`;
+              }
+            }
+          }
+        }
+      } else {
+        for (let category in services) {
+          if (category !== "Hussain") {
+            for (let service in services[category]) {
+              serviceList.innerHTML += `
+                <div onclick="selectService('${service}', ${services[category][service].price})">
+                  <img src="${services[category][service].logo}" alt="${service}">
+                  ${service}
+                </div>`;
+            }
+          }
+        }
+      }
+      document.getElementById("service-dropdown").style.display = "block";
+      document.getElementById("service-list").style.display = "block";
+    }
+  </script>
+</body>
+</html>
