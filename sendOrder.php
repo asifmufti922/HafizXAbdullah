@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $message = "📦 New Order!\n\n▫️ Category: $category\n▫️ Service: $service\n▫️ Quantity: $quantity\n▫️ Price: Rs $price\n▫️ Link: $videoLink\n▫️ WhatsApp: $whatsappNumber";
 
-    $telegramAPI = "https://api.telegram.org/bot$telegramBotToken/sendMessage";
+    $telegramAPI = "https://api.telegram.org/7251452177:AAEMKs8bl3IhtdNM5_GWRS-0mu-reWYaxXI/sendMessage";
     
     $data = [
         "chat_id" => $chatId,
